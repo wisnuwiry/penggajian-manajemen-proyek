@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     // Employee
-    Route::get('/employee', [EmployeeController::class, 'view'])->name('employee.view');
+    Route::resource('employee', EmployeeController::class); 
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

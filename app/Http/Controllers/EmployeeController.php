@@ -2,13 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
+use App\Models\Employee;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class EmployeeController extends Controller
 {
-    public function index(Request $request): View
+    public function index(): View
     {
-        return view('employee.index');
+        $employees = Employee::all();
+
+        return view('employee.index', compact('employees'));
+    }
+
+    public function detail(Employee $employee): View
+    {
+        return view('employee.index', compact('employee'));
+    }
+
+    public function create() : View {
+        return view('employee.create');    
+    }
+
+    public function store(StoreEmployeeRequest $request): RedirectResponse {
+        Employee::create($request->validate());
+
+        return to_route('employee.index');
+    }
+
+    public function edit(Employee $employee): View {
+        return view('employee.edit', compact('employee'));
+    }
+
+    public function update(UpdateEmployeeRequest $request, Employee $employee): RedirectResponse {
+        $employee->update($request->validate());
+
+        return to_route('employee.index');
+    }
+
+    public function delete(Employee $employee) {
+        $employee->delete();
+
+        return to_route('employee.index');
     }
 }
