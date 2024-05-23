@@ -17,14 +17,16 @@ return new class extends Migration
             $table->string('last_name');
             $table->date('birth_date');
             $table->date('hire_date');
-            $table->number('nik');
+            // $table->number('nik'); 
             $table->string('email')->unique();
             $table->string('phone_number')->nullable();
             $table->text('address')->nullable();
             $table->decimal('salary', 10, 2);
-            $table->text('bank_name');
-            $table->number('bank_account_number');
+            // $table->text('bank_name');
+            // $table->number('bank_account_number');
             $table->timestamps();
+            $table->bigInteger('position_id');
+            $table->bigInteger('department_id');
         });
     }
 
