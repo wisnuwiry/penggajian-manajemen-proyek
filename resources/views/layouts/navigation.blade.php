@@ -18,6 +18,12 @@
                     <x-nav-link :href="route('employee.index')" :active="request()->routeIs('employee.index')">
                         {{ __('Employee') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('department.index')" :active="request()->routeIs('department.index')">
+                        {{ __('Department') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('position.index')" :active="request()->routeIs('position.index')">
+                        {{ __('Position') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -75,6 +81,12 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('employee.index')" :active="request()->routeIs('employee.index')">
                 {{ __('Employee') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('department.index')" :active="request()->routeIs('department.index')">
+                {{ __('Department') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('position.index')" :active="request()->routeIs('position.index')">
+                {{ __('Position') }}
             </x-responsive-nav-link>
         </div>
 

@@ -14,19 +14,15 @@
             </div>
             <div class="flex-1">
                 <x-input-label for="department" :value="__('Department')" />
-                <!-- TODO: department dropdown -->
                 <x-select-input id="department" name="department">
-                    <option>A</option>
                 </x-select-input>
                 <x-input-error :messages="$errors->get('department_id')" class="mt-2" />
             </div>
         </div>
         <div class="flex flex-col md:flex-row flex-wrap gap-4">
             <div class="flex-1">
-                <x-input-label for="position" :value="__('Position')" />
-                <!-- TODO: position dropdown -->
+                <x-input-label for="position" :value="__('Position')"/>
                 <x-select-input id="position" name="position">
-                    <option>A</option>
                 </x-select-input>
                 <x-input-error :messages="$errors->get('position_id')" class="mt-2" />
             </div>
@@ -35,3 +31,47 @@
 
     </div>
 </section>
+
+<script>
+$('#department').select2({
+    placeholder: 'Select Department',
+    ajax: {
+        url: '/api/departments',
+        dataType: 'json',
+        delay: 250,
+        processResults: function (data) {
+            console.log(data);
+            return {
+            results:  $.map(data, function (item) {
+                    return {
+                        text: item.department_name,
+                        id: item.id
+                    }
+                })
+            };
+        },
+        cache: true
+    }
+});
+
+$('#position').select2({
+    placeholder: 'Select Position',
+    ajax: {
+        url: '/api/positions',
+        dataType: 'json',
+        delay: 250,
+        processResults: function (data) {
+            console.log(data);
+            return {
+            results:  $.map(data, function (item) {
+                    return {
+                        text: item.position_name,
+                        id: item.id
+                    }
+                })
+            };
+        },
+        cache: true
+    }
+});
+</script>

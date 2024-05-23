@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use App\Models\Department;
 use App\Models\Employee;
+use App\Models\Position;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class EmployeeController extends Controller
@@ -14,8 +15,10 @@ class EmployeeController extends Controller
     public function index(): View
     {
         $employees = Employee::all();
+        $departments = Department::all();
+        $positions = Position::all();
 
-        return view('employee.index', compact('employees'));
+        return view('employee.index', compact('employees', 'departments', 'positions'));
     }
 
     public function detail(Employee $employee): View
