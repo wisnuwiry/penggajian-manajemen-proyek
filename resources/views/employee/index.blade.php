@@ -59,7 +59,12 @@
                                     {{ $employee->position->position_name }}
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                    {{ $employee->salary }}
+                                @php
+                                    $formatter = new \NumberFormatter('id_ID', \NumberFormatter::CURRENCY);
+                                    $salary = $formatter->formatCurrency($employee->salary, 'IDR');
+                                @endphp
+    
+                                {{ $salary }}
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                                     Tergaji

@@ -6,11 +6,12 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <form class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6" action="{{ route('employee.store') }}" method="POST">
+            @csrf
             @include('employee.partials.general-employee-form')
             @include('employee.partials.contact-employee-form')
             @include('employee.partials.employee-info-form')
             @include('employee.partials.action-employee-form')
-        </div>
+        </form>
     </div>
 </x-app-layout>
