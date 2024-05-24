@@ -19,6 +19,7 @@
             <div class="flex-1">
                 <x-input-label for="department" :value="__('Department')" />
                 <x-select-input id="department" name="department_id" value="{{ old('department_id', $isEdit ? $employee->department_id : '') }}">
+                <option value="">Select Department</option>
                 @foreach($departments as $department)
                     <option value="{{ $department->id }}" {{ old('department_id', $isEdit ? $employee->department_id : '') == $department->id ? 'selected' : '' }}>
                         {{ $department->department_name }}
@@ -32,6 +33,7 @@
             <div class="flex-1">
                 <x-input-label for="position" :value="__('Position')"/>
                 <x-select-input id="position" name="position_id" value="{{ old('position_id', $isEdit ? $employee->position_id : '') }}">
+                <option value="">Select Position</option>
                 @foreach($positions as $position)
                     <option value="{{ $position->id }}" {{ old('position_id', $isEdit ? $employee->position_id : '') == $position->id ? 'selected' : '' }}>
                         {{ $position->position_name }}

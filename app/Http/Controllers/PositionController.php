@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePositionRequest;
+use App\Http\Requests\UpdatePositionRequest;
 use App\Models\Position;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class PositionController extends Controller
@@ -18,5 +21,41 @@ class PositionController extends Controller
         $positions = Position::all();
 
         return view('position.index', compact('positions'));
+    }
+
+    public function create() : View {
+        return view('position.create');    
+    }
+
+    public function store(StorePositionRequest $request): RedirectResponse {
+        try {
+            Position::create($request->validated());
+            return redirect()->route('position.index')->with('success', 'Position created successfully.');
+        } catch (\Exception $e) {
+            return back()
+                    ->withInput()
+                    ->withErrors('Failed to create position.');
+        }
+    }
+
+    public function edit(Position $position): View {
+        return view('position.edit', compact('position'));
+    }
+
+    public function update(UpdatePositionRequest $request, Position $position): RedirectResponse {
+        try {
+            $position->update($request->validated());
+            return redirect()->route('position.index')->with('success', 'Position update successfully.');
+        } catch (\Exception $e) {
+            return back()
+                    ->withInput()
+                    ->withErrors('Failed to update position.');
+        }
+    }
+
+    public function destroy(Position $position) {
+        $position->delete();
+
+        return to_route('position.index');
     }
 }

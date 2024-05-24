@@ -15,10 +15,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('employee', EmployeeController::class)->except(['show']);
 
     // Department
-    Route::resource('department', DepartmentController::class);
+    Route::resource('department', DepartmentController::class)->except(['show']);
 
     // Posotion
-    Route::resource('position', PositionController::class);
+    Route::resource('position', PositionController::class)->except(['show']);
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -21,10 +21,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone_number')->nullable();
             $table->string('address')->nullable();
-            $table->integer('salary', 10, 2);
+            $table->unsignedBigInteger('salary')->unsigned()->nullable();
             $table->string('bank_name');
             $table->string('bank_account_number');
             $table->timestamps();
+
+            $table->primary('id');
         });
     }
 
