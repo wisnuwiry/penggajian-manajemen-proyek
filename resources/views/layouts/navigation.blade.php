@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('payroll.index')" :active="request()->routeIs('payroll.index')">
+                        {{ __('Payroll') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('employee.index')" :active="request()->routeIs('employee.index')">
                         {{ __('Employee') }}
                     </x-nav-link>
@@ -78,6 +81,9 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('payroll.index')" :active="request()->routeIs('payroll.index')">
+                {{ __('Payroll') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('employee.index')" :active="request()->routeIs('employee.index')">
                 {{ __('Employee') }}
