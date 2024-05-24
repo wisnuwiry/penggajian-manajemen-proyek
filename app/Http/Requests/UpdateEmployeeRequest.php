@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateEmployeeRequest extends FormRequest
 {
@@ -29,9 +30,14 @@ class UpdateEmployeeRequest extends FormRequest
             'nik'             => 'required|numeric|digits:16',
             'department_id'   => 'required|exists:departments,id',
             'position_id'     => 'required|exists:positions,id',
-            'email'           => 'required|email|unique:employees,email',
-            'phone_number'    => 'nullable|string|max:15',
-            'address'         => 'nullable|string',
+            'email'           => [
+                                'required',
+                                'email',
+                                'max:255',
+                                Rule::unique('employees')->ignore($this->employee),
+            ],
+            'phone_number'    => 'required|string|max:15',
+            'address'         => 'required|string',
             'salary'          => 'required|numeric|min:0',
             'bank_name'       => 'required|string',
             'bank_account_number'   => 'required|numeric',
@@ -63,7 +69,9 @@ class UpdateEmployeeRequest extends FormRequest
             'email.unique'           => 'Email has already been taken.',
             'phone_number.string'    => 'Phone number must be a string.',
             'phone_number.max'       => 'Phone number may not be greater than 15 characters.',
+            'phone_number.required'  => 'Phone number is required.',
             'address.string'         => 'Address must be a string.',
+            'address.required'       => 'Address is required.',
             'salary.required'        => 'Salary is required.',
             'salary.numeric'         => 'Salary must be a number.',
             'salary.min'             => 'Salary must be at least 0.',

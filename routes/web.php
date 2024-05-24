@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     // Employee
-    Route::resource('employee', EmployeeController::class);
+    Route::resource('employee', EmployeeController::class)->except(['show']);
 
     // Department
     Route::resource('department', DepartmentController::class);

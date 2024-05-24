@@ -8,7 +8,6 @@ use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class EmployeeController extends Controller
@@ -18,11 +17,6 @@ class EmployeeController extends Controller
         $employees = Employee::all();
 
         return view('employee.index', compact('employees'));
-    }
-
-    public function detail(Employee $employee): View
-    {
-        return view('employee.index', compact('employee'));
     }
 
     public function create() : View {
@@ -44,16 +38,24 @@ class EmployeeController extends Controller
     }
 
     public function edit(Employee $employee): View {
-        return view('employee.edit', compact('employee'));
+        $departments = Department::all();
+        $positions = Position::all();
+
+        return view('employee.edit', compact('employee', 'departments', 'positions'));
     }
 
     public function update(UpdateEmployeeRequest $request, Employee $employee): RedirectResponse {
-        $employee->update($request->validate());
-
-        return to_route('employee.index');
+        try {
+            $employee->update($request->validated());
+            return redirect()->route('employee.index')->with('success', 'Employee update successfully.');
+        } catch (\Exception $e) {
+            return back()
+                    ->withInput()
+                    ->withErrors('Failed to update employee.');
+        }
     }
 
-    public function delete(Employee $employee) {
+    public function destroy(Employee $employee) {
         $employee->delete();
 
         return to_route('employee.index');
