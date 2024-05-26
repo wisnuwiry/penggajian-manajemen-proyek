@@ -50,7 +50,7 @@
                                     {{ $index+1 }}
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                    {{ $employee->first_name }} {{ $employee->last_name }} 
+                                    {{ $employee->first_name }} {{ $employee->last_name }}
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                                     {{ $employee->department->department_name }}
@@ -59,32 +59,31 @@
                                     {{ $employee->position->position_name }}
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                @php
+                                    @php
                                     $formatter = new \NumberFormatter('id_ID', \NumberFormatter::CURRENCY);
                                     $salary = $formatter->formatCurrency($employee->salary, 'IDR');
-                                @endphp
-    
-                                {{ $salary }}
+                                    @endphp
+
+                                    {{ $salary }}
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                                     Tergaji
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                    <a href="{{ route('employee.edit', $employee) }}" class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-700 shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
-                                        Edit
-                                    </a>
+                                    <x-edit-button href="{{ route('employee.edit', $employee) }}" />
                                     <form action="{{ route('employee.destroy', $employee) }}" method="POST" onsubmit="return confirm('Are you sure?')" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <x-danger-button>
-                                            Delete
-                                        </x-danger-button>
+                                        <x-delete-button type="submit" />
                                     </form>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="px-4">
+                    {{ $employees->links('components.pagination') }}
                 </div>
             </div>
         </div>

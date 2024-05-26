@@ -19,9 +19,9 @@ class DepartmentController extends Controller
 
     public function index(): View
     {
-        $departments = Department::all();
+        $departments = Department::paginate(10);
 
-        return view('department.index', compact('departments'));
+        return view('department.index', compact('departments'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     public function create() : View {

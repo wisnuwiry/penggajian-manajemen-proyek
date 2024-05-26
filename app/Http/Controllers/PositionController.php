@@ -18,9 +18,9 @@ class PositionController extends Controller
 
     public function index(): View
     {
-        $positions = Position::all();
+        $positions = Position::paginate(10);
 
-        return view('position.index', compact('positions'));
+        return view('position.index', compact('positions'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     public function create() : View {
