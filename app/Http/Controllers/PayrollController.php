@@ -18,7 +18,9 @@ class PayrollController extends Controller
     public function create()
     {
         $employees = Employee::all();
-        return view('payroll.create', compact('employees'));
+        $employeesJson = json_encode($employees);
+
+        return view('payroll.create', compact('employees', 'employeesJson'));
     }
 
     public function store(StorePayrollRequest $request)
