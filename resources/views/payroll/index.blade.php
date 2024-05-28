@@ -46,7 +46,7 @@
                                     {{ $payroll->details()->count() }}
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                    {{ $payroll->payroll_date }}
+                                    {{ date('d M Y', strtotime($payroll->payroll_date)); }}
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                                     @php 
@@ -57,6 +57,7 @@
                                     {{ $totalFormated }}
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
+                                    <x-detail-button href="{{ route('payroll.show', $payroll) }}"/>
                                     <form action="{{ route('payroll.destroy', $payroll) }}" method="POST" onsubmit="return confirm('Are you sure?')" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')

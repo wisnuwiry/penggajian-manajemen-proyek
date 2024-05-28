@@ -10,7 +10,6 @@
         @csrf
         
         @include('payroll.partials.payroll-form')
-    </form>
         </form>
     </div>
 </x-app-layout>
