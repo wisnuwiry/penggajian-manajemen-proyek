@@ -196,15 +196,14 @@
                 const employeeEntry = lastEntry.clone(true);
                 employeeEntry.find('.employee-select').attr('id', `employee_id_${newIndex}`);
                 employeeEntry.find('.basic-salary').attr('id', `basic_salary_${newIndex}`);
-                employeeEntry.find('.allowances').attr('id', `allowances_${newIndex}`);
-                employeeEntry.find('.deductions').attr('id', `deductions_${newIndex}`);
+                employeeEntry.find('.allowances').replaceWith(`<input class="border-gray-300 focus:border-primary-600 focus:ring-primary-600 rounded-md shadow-sm mt-1 block w-full" id="allowances_${newIndex}" name="allowances[]" value="0" type="number">`);
+                employeeEntry.find('.deductions').replaceWith(`<input class="border-gray-300 focus:border-primary-600 focus:ring-primary-600 rounded-md shadow-sm mt-1 block w-full" id="deductions_${newIndex}" name="deductions[]" value="0" type="number">`);
                 employeeEntry.find(`#employee_id_${newIndex}`).replaceWith(`<select id="employee_id_${newIndex}" name="employee_id[]" class="employee-select border-gray-300 focus:border-primary-600 focus:ring-primary-600 rounded-md shadow-sm mt-1 block w-full"><option value="">Select Employee</option></select>`);
                 employeeEntry.find('.select2-container').remove();
 
                 employeeEntry.find('.basic-salary').val('');
-                employeeEntry.find('.allowances').val(0);
-                employeeEntry.find('.deductions').val(0);
-                employeeEntry.find('h3').text(`Employee ${newIndex + 1}`);
+                employeeEntry.find('.allowances').val('0');
+                employeeEntry.find('.deductions').val('0');
                 $('#employees-container').append(employeeEntry);
 
                 updateRemoveButtonVisibility();
