@@ -20,7 +20,7 @@
                         <thead>
                             <tr>
                                 <th class="bg-gray-50 px-6 py-3 text-left">
-                                    <span class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500">No</span>
+                                    <span class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500">Id</span>
                                 </th>
                                 <th class="bg-gray-50 px-6 py-3 text-left">
                                     <span class="text-xs font-medium uppercase leading-4 tracking-wider text-gray-500">Name</span>
@@ -39,7 +39,7 @@
                         @foreach($positions as $index => $position)
                             <tr class="bg-white">
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                    {{ $index + 1 }}
+                                    {{ $position->formatted_id }}
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                                     {{ $position->position_name }}

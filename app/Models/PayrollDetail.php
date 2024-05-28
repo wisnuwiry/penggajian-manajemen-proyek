@@ -26,4 +26,9 @@ class PayrollDetail extends Model
     {
         return $this->belongsTo(Employee::class);
     }
+
+    public function getTakeHomePayAttribute()
+    {
+        return $this->basic_salary + $this->allowances - $this->deductions;
+    }
 }

@@ -14,6 +14,11 @@ class Position extends Model
         'description',
     ];
 
+    public function getFormattedIdAttribute()
+    {
+        return 'PS' . str_pad($this->attributes['id'], 4, '0', STR_PAD_LEFT);
+    }
+
     public function employees()
     {
         return $this->hasMany(Employee::class);

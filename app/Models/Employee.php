@@ -25,6 +25,11 @@ class Employee extends Model
         'bank_account_number',
     ];
 
+    public function getFormattedIdAttribute()
+    {
+        return 'EM' . str_pad($this->attributes['id'], 4, '0', STR_PAD_LEFT);
+    }
+
     public function department()
     {
         return $this->belongsTo(Department::class);

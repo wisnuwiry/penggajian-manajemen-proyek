@@ -11,8 +11,8 @@ class PayrollController extends Controller
 {
     public function index()
     {
-        $payrolls = Payroll::all();
-        return view('payroll.index', compact('payrolls'));
+        $payrolls = Payroll::paginate(10);
+        return view('payroll.index', compact('payrolls'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     public function create()
@@ -31,16 +31,14 @@ class PayrollController extends Controller
         $payroll->payroll_date = $validated['payroll_date'];
         $payroll->save();
 
-        return var_dump($validated);
-
-        // foreach ($validated['employee_id'] as $index => $employee_id) {
-        //     $payroll->details()->create([
-        //         'employee_id' => $employee_id,
-        //         'basic_salary' => $validated['basic_salary'][$index],
-        //         'allowances' => $validated['allowances'][$index],
-        //         'deductions' => $validated['deductions'][$index],
-        //     ]);
-        // }
+        foreach ($validated['employee_id'] as $index => $employee_id) {
+            $payroll->details()->create([
+                'employee_id' => $employee_id,
+                'basic_salary' => $validated['basic_salary'][$index],
+                'allowances' => $validated['allowances'][$index],
+                'deductions' => $validated['deductions'][$index],
+            ]);
+        }
 
         return redirect()->route('payroll.index')->with('success', 'Payroll created successfully.');
     }

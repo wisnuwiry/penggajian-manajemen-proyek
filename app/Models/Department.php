@@ -15,6 +15,11 @@ class Department extends Model
         'manager_id',
     ];
 
+    public function getFormattedIdAttribute()
+    {
+        return 'DP' . str_pad($this->attributes['id'], 4, '0', STR_PAD_LEFT);
+    }
+
     public function employees()
     {
         return $this->hasMany(Employee::class);

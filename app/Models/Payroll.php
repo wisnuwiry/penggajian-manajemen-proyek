@@ -10,17 +10,24 @@ class Payroll extends Model
     use HasFactory;
 
     protected $fillable = [
-        'employee_id',
-        'basic_salary',
-        'allowances',
-        'deductions',
-        'net_salary',
         'payroll_date'
     ];
+
+    public function getFormattedIdAttribute()
+    {
+        return 'PY' . str_pad($this->attributes['id'], 4, '0', STR_PAD_LEFT);
+    }
 
     public function details()
     {
         return $this->hasMany(PayrollDetail::class);
+    }
+
+    public function getTotalTakeHomePayAttribute()
+    {
+        return $this->details->sum(function ($detail) {
+            return $detail->take_home_pay;
+        });
     }
 
 }

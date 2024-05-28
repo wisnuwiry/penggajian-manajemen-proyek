@@ -106,7 +106,7 @@
                 </tbody>
             </table>
             <div class="flex w-full justify-end mt-6">
-                <h4 class="font-bold text-2xl py-4 px-8 bg-primary-100 rounded-lg cursor-pointer">Total: Rp. 4.000.000</h4>
+                <h4 class="font-bold text-2xl py-4 px-8 bg-primary-100 rounded-lg cursor-pointer">Total: <span id="total_take_home_pay">-</span></h4>
             </div>
         </div>
     </section>
@@ -134,12 +134,15 @@
         function updateSummary() {
             const summaryTableBody = $('#summary-table-body');
             summaryTableBody.html('');
+            let total = 0;
             $('.employee-entry').each(function(index, entry) {
                 const employeeName = $(entry).find('.employee-select option:selected').text();
                 const basicSalary = parseFloat($(entry).find('.basic-salary').val()) || 0;
-                const allowances = parseFloat($(entry).find('.allowances').val()) || 0;
-                const deductions = parseFloat($(entry).find('.deductions').val()) || 0;
+                const allowances = parseFloat($(`#allowances_${index}`).val()) || 0;
+                const deductions = parseFloat($(`#deductions_${index}`).val()) || 0;
                 const netSalary = basicSalary + allowances - deductions;
+                total += netSalary;
+                                
                 summaryTableBody.append(`
                     <tr class="bg-white">
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
@@ -162,6 +165,7 @@
                         </td>
                     </tr>
                 `);
+                $('#total_take_home_pay').text(`${total}`);
             });
         }
 
@@ -216,15 +220,14 @@
         // Remove employee entry
         $(document).on('click', '.remove-employee', function() {
             $(this).closest('.employee-entry').remove();
-            const test = $(this).closest('input');
-            console.log(test);
+
             updateSummary();
             updateRemoveButtonVisibility();
             disableEmployeesSelector(); // Update disabled options
         });
 
         // Update summary on allowances or deductions input
-        $(document).on('input', '.allowances, .deductions', function() {
+        $(document).on('input', function() {
             updateSummary();
         });
 
