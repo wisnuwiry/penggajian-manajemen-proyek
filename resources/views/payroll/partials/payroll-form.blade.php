@@ -141,8 +141,12 @@
                 const allowances = parseFloat($(`#allowances_${index}`).val()) || 0;
                 const deductions = parseFloat($(`#deductions_${index}`).val()) || 0;
                 const netSalary = basicSalary + allowances - deductions;
+                let rupiah = Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                });
                 total += netSalary;
-                                
+
                 summaryTableBody.append(`
                     <tr class="bg-white">
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
@@ -152,20 +156,20 @@
                             ${employeeName}
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                            ${basicSalary}
+                            ${rupiah.format(basicSalary)}
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                            ${allowances}
+                            ${rupiah.format(allowances)}
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                            ${deductions}
+                            ${rupiah.format(deductions)}
                         </td>
                         <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                            ${netSalary}
+                            ${rupiah.format(netSalary)}
                         </td>
                     </tr>
                 `);
-                $('#total_take_home_pay').text(`${total}`);
+                $('#total_take_home_pay').text(`${rupiah.format(total)}`);
             });
         }
 
