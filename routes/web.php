@@ -23,6 +23,9 @@ Route::middleware('auth')->group(function () {
 
     // Payroll
     Route::resource('payroll', PayrollController::class);
+    Route::get('/payroll/payslips/download/{id}', [PayrollController::class, 'download'])->name('payslip.download');
+    Route::get('/payroll/payslips/token/{id}', [PayrollController::class, 'getPayslipToken'])->name('payslips.token');
+    Route::get('/payroll/payslips/view/{token}', [PayrollController::class, 'showPayslipWithToken'])->name('payslips.viewWithToken');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -15,6 +15,7 @@ class PayrollDetail extends Model
         'basic_salary',
         'allowances',
         'deductions',
+        'pdf_path',
     ];
 
     public function payroll()

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('basic_salary');
             $table->unsignedBigInteger('allowances')->nullable();
             $table->unsignedBigInteger('deductions')->nullable();
+            $table->string('pdf_path');
             $table->timestamps();
         });
     }

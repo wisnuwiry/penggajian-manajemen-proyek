@@ -35,6 +35,8 @@
             <main>
                 {{ $slot }}
             </main>
+
+            @include('components.copyright')
         </div>
     </body>
 </html>
