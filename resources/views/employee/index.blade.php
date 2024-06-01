@@ -67,7 +67,7 @@
                                     {{ $salary }}
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
-                                    Tergaji
+                                    {{ $employee->is_paid_this_month ? 'Paid' : 'Not Paid'}}
                                 </td>
                                 <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                                     <x-edit-button href="{{ route('employee.edit', $employee) }}" />

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,6 +44,22 @@ class Employee extends Model
     public function salaries()
     {
         return $this->hasMany(Salary::class);
+    }
+
+    public function payrolls()
+    {
+        return $this->hasManyThrough(Payroll::class, PayrollDetail::class, 'employee_id', 'id', 'id', 'payroll_id');
+    }
+    
+    public function getIsPaidThisMonthAttribute()
+    {
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        return $this->payrolls()
+                    ->whereYear('payrolls.payroll_date', $currentYear)
+                    ->whereMonth('payrolls.payroll_date', $currentMonth)
+                    ->exists();
     }
 
     protected function casts(): array
