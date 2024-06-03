@@ -18,7 +18,7 @@ class PayrollController extends Controller
 {
     public function index()
     {
-        $payrolls = Payroll::paginate(10);
+        $payrolls = Payroll::orderByDesc('created_at')->paginate(10);
         return view('payroll.index', compact('payrolls'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 

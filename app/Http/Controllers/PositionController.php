@@ -18,7 +18,7 @@ class PositionController extends Controller
 
     public function index(): View
     {
-        $positions = Position::paginate(10);
+        $positions = Position::orderByDesc('created_at')->paginate(10);
 
         return view('position.index', compact('positions'))->with('i', (request()->input('page', 1) - 1) * 10);
     }

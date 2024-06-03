@@ -19,7 +19,7 @@ class DepartmentController extends Controller
 
     public function index(): View
     {
-        $departments = Department::paginate(10);
+        $departments = Department::orderByDesc('created_at')->paginate(10);
 
         return view('department.index', compact('departments'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
