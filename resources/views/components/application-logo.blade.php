@@ -1,1 +1,1 @@
-<img src="/img/logo.png"  class="w-12 h-12"/>
+<img src="/img/logo.png" {!! $attributes->merge(['class' => 'w-12 h-12' ]) !!}/>

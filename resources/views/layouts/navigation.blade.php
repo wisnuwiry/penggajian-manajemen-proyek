@@ -1,123 +1,59 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-r shadow-sm border-gray-100 shrink-0 transition-all duration-300 ease-in-out m-0 z-40 inset-y-0 left-0">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('payroll.index')" :active="request()->routeIs('payroll.index')">
-                        {{ __('Payroll') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('employee.index')" :active="request()->routeIs('employee.index')">
-                        {{ __('Employee') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('department.index')" :active="request()->routeIs('department.index')">
-                        {{ __('Department') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('position.index')" :active="request()->routeIs('position.index')">
-                        {{ __('Position') }}
-                    </x-nav-link>
-                </div>
-            </div>
-
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
-            </div>
-
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    <div :class="{'w-[100px]': open, 'lg:w-[320px] w-[250px]': ! open }">
+        <div class="flex flex-col">
+            <!-- Logo -->
+            <div class="flex flex-row items-center py-4 px-2 gap-3 border-b h-16">
+                <button class="text-primary-500" @click="open = ! open">
+                    <svg width="24" height="24" viewBox="0 0 24 24" class="fill-primary-500" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M20.7071 7.29289C21.0976 7.68342 21.0976 8.31658 20.7071 8.70711L17.4142 12L20.7071 15.2929C21.0976 15.6834 21.0976 16.3166 20.7071 16.7071C20.3166 17.0976 19.6834 17.0976 19.2929 16.7071L15.2929 12.7071C14.9024 12.3166 14.9024 11.6834 15.2929 11.2929L19.2929 7.29289C19.6834 6.90237 20.3166 6.90237 20.7071 7.29289Z" />
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3 7C3 6.44772 3.44772 6 4 6L16 6C16.5523 6 17 6.44772 17 7C17 7.55229 16.5523 8 16 8L4 8C3.44772 8 3 7.55228 3 7Z" />
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3 17C3 16.4477 3.44772 16 4 16L16 16C16.5523 16 17 16.4477 17 17C17 17.5523 16.5523 18 16 18L4 18C3.44772 18 3 17.5523 3 17Z" />
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3 12C3 11.4477 3.44772 11 4 11L12 11C12.5523 11 13 11.4477 13 12C13 12.5523 12.5523 13 12 13L4 13C3.44772 13 3 12.5523 3 12Z" />
                     </svg>
                 </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('payroll.index')" :active="request()->routeIs('payroll.index')">
-                {{ __('Payroll') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('employee.index')" :active="request()->routeIs('employee.index')">
-                {{ __('Employee') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('department.index')" :active="request()->routeIs('department.index')">
-                {{ __('Department') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('position.index')" :active="request()->routeIs('position.index')">
-                {{ __('Position') }}
-            </x-responsive-nav-link>
-        </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                <x-application-logo class="block h-8 w-auto fill-current text-gray-800" />
+                <p :class="{'hidden': open, 'font-bold text-lg': ! open }">{{ config('app.name', 'Laravel') }}</p>
             </div>
 
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+            <!-- Navigation Links -->
+            <div class="flex flex-col w-full gap-1 px-3 mt-4">
+                <div>
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <svg width="20" height="20" viewBox="0 0 20 20" class="w-5" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.41077 1.91076C9.7362 1.58533 10.2638 1.58533 10.5893 1.91076L18.0893 9.41077C18.4147 9.7362 18.4147 10.2638 18.0893 10.5893C17.7638 10.9147 17.2362 10.9147 16.9108 10.5893L16.6667 10.3452V16.6667C16.6667 17.1087 16.4911 17.5326 16.1785 17.8452C15.866 18.1578 15.442 18.3334 15 18.3334H5.00002C4.55799 18.3334 4.13407 18.1578 3.82151 17.8452C3.50895 17.5326 3.33335 17.1087 3.33335 16.6667V10.3452L3.08928 10.5893C2.76384 10.9147 2.2362 10.9147 1.91076 10.5893C1.58533 10.2638 1.58533 9.7362 1.91076 9.41077L9.41077 1.91076ZM5.00002 8.67853V16.6667H7.50002V13.3334C7.50002 12.8913 7.67562 12.4674 7.98818 12.1548C8.30074 11.8423 8.72466 11.6667 9.16669 11.6667H10.8334C11.2754 11.6667 11.6993 11.8423 12.0119 12.1548C12.3244 12.4674 12.5 12.8913 12.5 13.3334V16.6667H15V8.67853L10 3.67853L5.00002 8.67853ZM10.8334 16.6667V13.3334H9.16669V16.6667H10.8334Z" fill="currentColor" />
+                        </svg>
 
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+                        <p :class="{'hidden': open, '': ! open }">{{ __('Dashboard') }}</p>
+                    </x-nav-link>
+                    <hr class="my-4">
+                </div>
+                <x-nav-link :href="route('payroll.index')" :active="request()->routeIs('payroll.index')">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+                    </svg>
+                    <p :class="{'hidden': open, '': ! open }">{{ __('Payroll') }}</p>
+                </x-nav-link>
+                <x-nav-link :href="route('employee.index')" :active="request()->routeIs('employee.index')">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="w-5" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.2158 12.9342C14.6057 12.668 15.0629 12.5176 15.5346 12.5004C16.0064 12.4832 16.4733 12.5999 16.8815 12.837C17.2897 13.0741 17.6224 13.422 17.8411 13.8403C18.0598 14.2586 18.1557 14.7303 18.1175 15.2008C17.1177 15.5503 16.0557 15.6863 15 15.6C14.9968 14.6555 14.7248 13.7306 14.2158 12.935C13.7641 12.2265 13.1409 11.6434 12.404 11.2396C11.6671 10.8358 10.8403 10.6244 10 10.625C9.15987 10.6246 8.3332 10.836 7.59645 11.2398C6.8597 11.6436 6.23668 12.2266 5.78501 12.935M14.9992 15.5992L15 15.625C15 15.8125 14.99 15.9975 14.9692 16.18C13.457 17.0476 11.7434 17.5028 10 17.5C8.19167 17.5 6.49417 17.02 5.03084 16.18C5.00942 15.9871 4.99912 15.7932 5.00001 15.5992M5.00001 15.5992C3.9447 15.6886 2.88326 15.5531 1.88417 15.2017C1.84613 14.7313 1.942 14.2598 2.1607 13.8416C2.37939 13.4234 2.71198 13.0757 3.12001 12.8386C3.52804 12.6015 3.99484 12.4847 4.46644 12.5018C4.93804 12.5188 5.39518 12.669 5.78501 12.935M5.00001 15.5992C5.003 14.6548 5.27636 13.7307 5.78501 12.935M12.5 5.625C12.5 6.28804 12.2366 6.92393 11.7678 7.39277C11.2989 7.86161 10.663 8.125 10 8.125C9.33697 8.125 8.70108 7.86161 8.23224 7.39277C7.7634 6.92393 7.50001 6.28804 7.50001 5.625C7.50001 4.96196 7.7634 4.32607 8.23224 3.85723C8.70108 3.38839 9.33697 3.125 10 3.125C10.663 3.125 11.2989 3.38839 11.7678 3.85723C12.2366 4.32607 12.5 4.96196 12.5 5.625ZM17.5 8.125C17.5 8.37123 17.4515 8.61505 17.3573 8.84253C17.2631 9.07002 17.1249 9.27672 16.9508 9.45082C16.7767 9.62493 16.57 9.76305 16.3425 9.85727C16.1151 9.9515 15.8712 10 15.625 10C15.3788 10 15.135 9.9515 14.9075 9.85727C14.68 9.76305 14.4733 9.62493 14.2992 9.45082C14.1251 9.27672 13.987 9.07002 13.8927 8.84253C13.7985 8.61505 13.75 8.37123 13.75 8.125C13.75 7.62772 13.9476 7.15081 14.2992 6.79917C14.6508 6.44754 15.1277 6.25 15.625 6.25C16.1223 6.25 16.5992 6.44754 16.9508 6.79917C17.3025 7.15081 17.5 7.62772 17.5 8.125ZM6.25001 8.125C6.25001 8.37123 6.20151 8.61505 6.10728 8.84253C6.01305 9.07002 5.87494 9.27672 5.70083 9.45082C5.52672 9.62493 5.32002 9.76305 5.09254 9.85727C4.86505 9.9515 4.62124 10 4.37501 10C4.12878 10 3.88496 9.9515 3.65748 9.85727C3.42999 9.76305 3.22329 9.62493 3.04918 9.45082C2.87507 9.27672 2.73696 9.07002 2.64273 8.84253C2.54851 8.61505 2.50001 8.37123 2.50001 8.125C2.50001 7.62772 2.69755 7.15081 3.04918 6.79917C3.40081 6.44754 3.87773 6.25 4.37501 6.25C4.87229 6.25 5.3492 6.44754 5.70083 6.79917C6.05246 7.15081 6.25001 7.62772 6.25001 8.125Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p :class="{'hidden': open, '': ! open }">{{ __('Employee') }}</p>
+                </x-nav-link>
+                <x-nav-link :href="route('department.index')" :active="request()->routeIs('department.index')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="w-5" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.2501 14.1501V18.4001C20.2501 19.4941 19.4631 20.4361 18.3781 20.5801C16.2911 20.8571 14.1621 21.0001 12.0001 21.0001C9.83806 21.0001 7.70906 20.8571 5.62206 20.5801C4.53706 20.4361 3.75006 19.4941 3.75006 18.4001V14.1501M20.2501 14.1501C20.4875 13.9437 20.6775 13.6884 20.807 13.4017C20.9364 13.115 21.0023 12.8036 21.0001 12.4891V8.70606C21.0001 7.62506 20.2321 6.69106 19.1631 6.53106C18.0304 6.36148 16.892 6.2324 15.7501 6.14406M20.2501 14.1501C20.0561 14.3151 19.8301 14.4451 19.5771 14.5301C17.1333 15.3409 14.5748 15.7528 12.0001 15.7501C9.35206 15.7501 6.80506 15.3211 4.42306 14.5301C4.17631 14.448 3.94778 14.3189 3.75006 14.1501M3.75006 14.1501C3.5126 13.9437 3.32262 13.6884 3.19315 13.4017C3.06369 13.115 2.99782 12.8036 3.00006 12.4891V8.70606C3.00006 7.62506 3.76806 6.69106 4.83706 6.53106C5.96975 6.36148 7.10814 6.2324 8.25006 6.14406M15.7501 6.14406V5.25006C15.7501 4.65332 15.513 4.08103 15.091 3.65907C14.6691 3.23711 14.0968 3.00006 13.5001 3.00006H10.5001C9.90332 3.00006 9.33102 3.23711 8.90907 3.65907C8.48711 4.08103 8.25006 4.65332 8.25006 5.25006V6.14406M15.7501 6.14406C13.2538 5.95114 10.7463 5.95114 8.25006 6.14406M12.0001 12.7501H12.0081V12.7581H12.0001V12.7501Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
 
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
+                    <p :class="{'hidden': open, '': ! open }">{{ __('Department') }}</p>
+                </x-nav-link>
+                <x-nav-link :href="route('position.index')" :active="request()->routeIs('position.index')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="w-5" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.2501 14.1501V18.4001C20.2501 19.4941 19.4631 20.4361 18.3781 20.5801C16.2911 20.8571 14.1621 21.0001 12.0001 21.0001C9.83806 21.0001 7.70906 20.8571 5.62206 20.5801C4.53706 20.4361 3.75006 19.4941 3.75006 18.4001V14.1501M20.2501 14.1501C20.4875 13.9437 20.6775 13.6884 20.807 13.4017C20.9364 13.115 21.0023 12.8036 21.0001 12.4891V8.70606C21.0001 7.62506 20.2321 6.69106 19.1631 6.53106C18.0304 6.36148 16.892 6.2324 15.7501 6.14406M20.2501 14.1501C20.0561 14.3151 19.8301 14.4451 19.5771 14.5301C17.1333 15.3409 14.5748 15.7528 12.0001 15.7501C9.35206 15.7501 6.80506 15.3211 4.42306 14.5301C4.17631 14.448 3.94778 14.3189 3.75006 14.1501M3.75006 14.1501C3.5126 13.9437 3.32262 13.6884 3.19315 13.4017C3.06369 13.115 2.99782 12.8036 3.00006 12.4891V8.70606C3.00006 7.62506 3.76806 6.69106 4.83706 6.53106C5.96975 6.36148 7.10814 6.2324 8.25006 6.14406M15.7501 6.14406V5.25006C15.7501 4.65332 15.513 4.08103 15.091 3.65907C14.6691 3.23711 14.0968 3.00006 13.5001 3.00006H10.5001C9.90332 3.00006 9.33102 3.23711 8.90907 3.65907C8.48711 4.08103 8.25006 4.65332 8.25006 5.25006V6.14406M15.7501 6.14406C13.2538 5.95114 10.7463 5.95114 8.25006 6.14406M12.0001 12.7501H12.0081V12.7581H12.0001V12.7501Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+
+                    <p :class="{'hidden': open, '': ! open }">{{ __('Position') }}</p>
+                </x-nav-link>
             </div>
         </div>
     </div>
