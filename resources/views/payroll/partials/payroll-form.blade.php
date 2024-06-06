@@ -55,21 +55,6 @@
         </div>
     </section>
 
-    <section class="p-4 sm:p-8 bg-white shadow sm:rounded-lg fixed bottom-0 left-0 right-0">
-        <div class="flex flex-col md:flex-row flex-wrap gap-4 max-w-7xl m-auto">
-            <div class="flex-1">
-                <x-input-label for="payroll_date" :value="__('Payroll Date')" />
-                <input id="payroll_date" name="payroll_date" value="{{ old('payroll_date', isset($payroll) ? $payroll->payroll_date->format('Y-m-d') : '') }}" type="date" class="border-gray-300 focus:border-primary-600 focus:ring-primary-600 rounded-md shadow-sm mt-1 block w-full" required />
-                <x-input-error :messages="$errors->get('payroll_date')" class="mt-2" />
-            </div>
-            <div class="flex-1 flex justify-end">
-                <button class="inline-flex items-center px-12 py-2 bg-primary-500 border border-transparent rounded-lg font-semibold text-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 transition ease-in-out duration-150">
-                    {{ isset($payroll) ? 'Update' : 'Save' }}
-                </button>
-            </div>
-        </div>
-    </section>
-
     <section class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
         <header>
             <h2 class="text-lg font-medium text-gray-900">
@@ -110,7 +95,21 @@
             </div>
         </div>
     </section>
-    <div class="h-[100px]"></div>
+
+    <section class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+        <div class="flex flex-col md:flex-row flex-wrap gap-4 max-w-7xl m-auto">
+            <div class="flex-1">
+                <x-input-label for="payroll_date" :value="__('Payroll Date')" />
+                <input id="payroll_date" name="payroll_date" value="{{ old('payroll_date', isset($payroll) ? $payroll->payroll_date->format('Y-m-d') : '') }}" type="date" class="border-gray-300 focus:border-primary-600 focus:ring-primary-600 rounded-md shadow-sm mt-1 block w-full" required />
+                <x-input-error :messages="$errors->get('payroll_date')" class="mt-2" />
+            </div>
+            <div class="flex-1 flex justify-end">
+                <button class="inline-flex items-center px-12 py-2 bg-primary-500 border border-transparent rounded-lg font-semibold text-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 transition ease-in-out duration-150">
+                    {{ isset($payroll) ? 'Update' : 'Save' }}
+                </button>
+            </div>
+        </div>
+    </section>
 </form>
 
 <script>
