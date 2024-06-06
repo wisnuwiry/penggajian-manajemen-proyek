@@ -4,7 +4,7 @@
     @method('PUT')
     @endif
 
-    <section class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+    <section class="p-4 sm:p-8 bg-white shadow rounded-lg">
         <header>
             <h2 class="text-lg font-medium text-gray-900">
                 {{ __('Employees') }}
@@ -55,14 +55,14 @@
         </div>
     </section>
 
-    <section class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+    <section class="p-4 sm:p-8 bg-white shadow rounded-lg">
         <header>
             <h2 class="text-lg font-medium text-gray-900">
                 {{ __('Summary') }}
             </h2>
         </header>
         <hr class="my-4">
-        <div id="summary-container">
+        <div id="summary-container" class="w-full overflow-x-scroll">
             <table class="min-w-full border divide-y divide-gray-200">
                 <thead>
                     <tr>
@@ -96,7 +96,7 @@
         </div>
     </section>
 
-    <section class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+    <section class="p-4 sm:p-8 bg-white shadow rounded-lg">
         <div class="flex flex-col md:flex-row flex-wrap gap-4 max-w-7xl m-auto">
             <div class="flex-1">
                 <x-input-label for="payroll_date" :value="__('Payroll Date')" />

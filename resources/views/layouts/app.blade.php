@@ -43,12 +43,14 @@
         <!-- Page Content -->
         <main class="overflow-scroll h-[calc(100vh-64px)] min-h-[calc(100%-64px)]">
             <!-- Page Heading -->
-            @if (isset($header))
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-12">
-                {{ $header }}
+            <div class="px-3">
+                @if (isset($header))
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-12">
+                    {{ $header }}
+                </div>
+                @endif
+                {{ $slot }}
             </div>
-            @endif
-            {{ $slot }}
             @include('components.copyright')
         </main>
     </div>

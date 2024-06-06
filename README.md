@@ -1,7 +1,3 @@
-## References Design
-
-![](https://cdn.dribbble.com/userupload/3187272/file/original-60d4b7f841a199e9ab4afff00447e6ae.png?resize=2048x1536)
-
 ## How to setup
 
 Install dependencies
@@ -20,7 +16,7 @@ php artisan db:seed
 Running
 
 ```sh
-php artisan serve
+npm run build && php artisan serve
 ```
 
 

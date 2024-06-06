@@ -1,4 +1,4 @@
-<div class="grid grid-cols-3 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <div class="rounded-lg shadow bg-white p-6 flex flex-col gap-2.5">
         <div class="flex flex-row gap-1">
             <p class="font-bold text-sm text-gray-500">Balance</p>

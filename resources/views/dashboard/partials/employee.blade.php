@@ -1,4 +1,4 @@
-<div class="bg-white overflow-hidden shadow sm:rounded-lg p-6">
+<div class="bg-white overflow-hidden shadow rounded-lg p-6">
     <div class="flex flex-col gap-2.5">
         <div class="flex flex-row gap-1">
             <p class="font-bold text-sm text-gray-500">Employees</p>

@@ -2,7 +2,7 @@
     $isEdit = isset($position);
 @endphp
 
-<section class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+<section class="p-4 sm:p-8 bg-white shadow rounded-lg">
     <div class="flex flex-col mt-4 gap-6">
         <div class="flex flex-col md:flex-row flex-wrap gap-4">
             <div class="flex-1">

@@ -1,4 +1,4 @@
-<section class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+<section class="p-4 sm:p-8 bg-white shadow rounded-lg">
     <div class="flex flex-row gap-4 justify-end w-full">
         <x-secondary-button>
             {{ __('Cancel') }}
