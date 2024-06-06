@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-6">
         <form class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6" action="{{ route('employee.store') }}" method="POST">
             @csrf
             @include('employee.partials.general-employee-form')
