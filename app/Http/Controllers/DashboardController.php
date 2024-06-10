@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\PayrollDetail;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 
@@ -31,6 +32,21 @@ class DashboardController extends Controller
         // Total number of employees unpaid this month
         $unpaidEmployeesCount = $totalEmployees - $paidEmployeesCount;
 
-        return view('dashboard.index', compact('unpaidEmployees', 'totalEmployees', 'paidEmployeesCount', 'unpaidEmployeesCount'))->with('i', (request()->input('page', 1) - 1) * 10);
+        // Hitung total basic_salary dari payroll_details
+        $totalPaid = PayrollDetail::sum('basic_salary');
+
+        // hitung total unpaid basic salary
+        $totalUnpaid = (Employee::sum('salary'))-$totalPaid;
+
+        //total tunjangan
+        $totalAllowances = PayrollDetail::sum('allowances');
+
+        //total pengurangan
+        $totalDeductions = PayrollDetail::sum('deductions');
+
+        //total seluruh gaji terbayar
+        $totalAll = $totalPaid + $totalAllowances - $totalDeductions;
+
+        return view('dashboard.index', compact('totalDeductions','totalAll','totalAllowances','unpaidEmployees', 'totalEmployees', 'paidEmployeesCount', 'unpaidEmployeesCount', 'totalPaid','totalUnpaid'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 }
